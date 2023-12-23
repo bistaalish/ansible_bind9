@@ -1,0 +1,18 @@
+---
+- name: Install BIND9, Update APT Package Lists, and Copy Configurations
+  become: true
+  hosts: all
+  remote_user: vagrant
+  tasks:
+    - name: Update APT Package Lists
+      apt:
+        update_cache: yes
+
+    - name: Install BIND9, BIND9 Utils, and BIND9 Documentation
+      apt:
+        name:
+          - bind9
+          - bind9utils
+          - bind9-doc
+        state: present
+

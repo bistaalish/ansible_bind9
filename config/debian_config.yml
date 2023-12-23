@@ -1,0 +1,43 @@
+---
+- name: Install BIND9, Update APT Package Lists, and Copy Configurations
+  become: true
+  hosts: all
+  remote_user: vagrant
+  tasks:
+    - name: Copy named
+      copy:
+        src: ./named
+        dest: /etc/default/named
+      notify:
+        - restart bind
+    - name: Copy reverse bind
+      copy:
+        src: ./reverse.home.lab
+        dest: /etc/bind/
+      notify:
+        - restart bind
+    - name: Copy named.conf.local
+      copy:
+        src: ./named.conf.local
+        dest: /etc/bind/
+      notify:
+        - restart bind
+    - name: Copy named.conf.options
+      copy:
+        src: ./named.conf.options
+        dest: /etc/bind/
+      notify:
+        - restart bind
+
+    - name: Copy Forwarders
+      copy:
+        src: ./forward.home.lab
+        dest: /etc/bind/
+      notify:
+        - restart bind
+
+  handlers:
+    - name: restart bind
+      systemd:
+        name: bind9
+        state: restarted

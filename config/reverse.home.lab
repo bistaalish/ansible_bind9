@@ -1,0 +1,17 @@
+TTL	604800
+@	IN	SOA	dns.home.lab. admin.dns.home.lab. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	dns.home.lab.
+dns	IN	A	192.168.10.59
+
+;REverse Lookup
+5	IN	PTR	dell.home.lab.
+4       IN      PTR     sony.home.lab.
+3       IN      PTR     rog.home.lab.
+6	IN	PTR	desk.home.lab.
+59	IN	PTR	dns.home.lab.
