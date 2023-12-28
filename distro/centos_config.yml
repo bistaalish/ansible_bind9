@@ -1,0 +1,24 @@
+---
+- name: Copying configuration files.
+  become: true
+  hosts: all
+  remote_user: vagrant
+  gather_facts: false
+  tasks:
+    - name: Copying named on /etc/named.conf
+      copy:
+        src: ../config/cent/named.conf
+        dest: /etc/named.conf
+      notify:
+        - restart named
+    - name: Copy forward.home.lab to /etc/named/forward.home.lab
+      copy:
+        src: ../config/cent/forward.home.lab
+        dest: /etc/named/forward.home.lab
+      notify:
+        - restart named
+  handlers:
+    - name: restart named
+      systemd:
+        name: named
+        state: restarted

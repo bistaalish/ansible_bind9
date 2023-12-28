@@ -1,0 +1,16 @@
+$TTL 1D
+@       IN      SOA     dns.home.lab. admin.home.lab. (
+                                    2022010101 ; Serial
+                                    1D         ; Refresh
+                                    1H         ; Retry
+                                    1W         ; Expire
+                                    3H )       ; Negative Cache TTL
+
+@       IN      NS      dns.home.lab.
+
+;A record for host names
+dell    IN      A       192.168.10.5
+sony    IN      A       192.168.10.4
+rog     IN      A       192.168.10.3
+desk    IN      A       192.168.10.6
+dns     IN      A       192.168.10.58

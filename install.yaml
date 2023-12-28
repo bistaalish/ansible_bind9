@@ -1,10 +1,22 @@
 ---
-- name: Run Script on Debian 12.2
+- name: Install DNS Server on Linux
   hosts: all
   remote_user: vagrant
   gather_facts: true
 
-- ansible.builtin.import_playbook: ./distro/debian12_2.yml
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == '12.2'
-- ansible.builtin.import_playbook: ./config/debian_config.yml
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == '12.2'
+# - ansible.builtin.import_playbook: ./distro/debian.yml
+#   when: ansible_distribution == 'Debian' 
+# - ansible.builtin.import_playbook: ./distro/debian_config.yml
+#   when: ansible_distribution == 'Debian'
+# - ansible.builtin.import_playbook: ./distro/centos.yml
+#   when: ansible_distribution == 'CentOS'
+# - ansible.builtin.import_playbook: ./distro/centos_config.yml
+#   when: ansible_distribution == 'CentOS'
+- ansible.builtin.import_playbook: ./distro/debian.yml
+  when: ansible_distribution == 'Ubuntu'
+- ansible.builtin.import_playbook: ./distro/ubuntu_config.yml
+  when: ansible_distribution == 'Ubuntu'
+  # tasks:
+  #   - name: Display Distro Type and Version
+  #     debug:
+  #       msg: "Distribution: {{ ansible_distribution }}, Version: {{ ansible_distribution_version }}"

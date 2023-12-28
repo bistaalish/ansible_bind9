@@ -1,37 +1,38 @@
 ---
-- name: Install BIND9, Update APT Package Lists, and Copy Configurations
+- name: Copying configuration files.
   become: true
   hosts: all
   remote_user: vagrant
+  gather_facts: false
   tasks:
     - name: Copy named
       copy:
-        src: ./named
+        src: ../config/debian/named
         dest: /etc/default/named
       notify:
         - restart bind
     - name: Copy reverse bind
       copy:
-        src: ./reverse.home.lab
+        src: ../config/debian/reverse.home.lab
         dest: /etc/bind/
       notify:
         - restart bind
     - name: Copy named.conf.local
       copy:
-        src: ./named.conf.local
+        src: ../config/debian/named.conf.local
         dest: /etc/bind/
       notify:
         - restart bind
     - name: Copy named.conf.options
       copy:
-        src: ./named.conf.options
+        src: ../config/debian/named.conf.options
         dest: /etc/bind/
       notify:
         - restart bind
 
     - name: Copy Forwarders
       copy:
-        src: ./forward.home.lab
+        src: ../config/debian/forward.home.lab
         dest: /etc/bind/
       notify:
         - restart bind

@@ -4,9 +4,9 @@ acl trusted {
 options {
         directory "/var/cache/bind";
         allow-recursion { trusted; };
-        allow-transfer { localhost; };
+        allow-transfer { any; };
 	allow-query { any; };
-        listen-on port 53 { localhost; 192.168.10.59; };
+        listen-on port 53 { any; };
         // If there is a firewall between you and nameservers you want
         // to talk to, you may need to fix the firewall to allow multiple
         // ports to talk.  See http://www.kb.cert.org/vuls/id/800113

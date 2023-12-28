@@ -1,0 +1,50 @@
+---
+- name: Copying configuration files.
+  become: true
+  hosts: all
+  remote_user: vagrant
+  gather_facts: false
+  tasks:
+    - name: Copy named
+      copy:
+        src: ../config/debian/named
+        dest: /etc/default/named
+      notify:
+        - restart bind
+    - name: Copy reverse bind
+      copy:
+        src: ../config/debian/reverse.home.lab
+        dest: /etc/bind/
+      notify:
+        - restart bind
+    - name: Copy named.conf.local
+      copy:
+        src: ../config/debian/named.conf.local
+        dest: /etc/bind/
+      notify:
+        - restart bind
+    - name: Copy named.conf.options
+      copy:
+        src: ../config/debian/named.conf.options
+        dest: /etc/bind/
+      notify:
+        - restart bind
+
+    - name: Copy Forwarders
+      copy:
+        src: ../config/debian/forward.home.lab
+        dest: /etc/bind/
+      notify:
+        - disable resolved
+        - restart bind
+
+  handlers:
+    - name: disable resolved
+      systemd:
+        name: systemd-resolved
+        state: stopped
+        enabled: false
+    - name: restart bind
+      systemd:
+        name: bind9
+        state: restarted

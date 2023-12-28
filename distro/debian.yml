@@ -3,10 +3,14 @@
   become: true
   hosts: all
   remote_user: vagrant
+  gather_facts: false
   tasks:
     - name: Update APT Package Lists
       apt:
         update_cache: yes
+    - name: Upgrading the system.
+      apt:
+        upgrade: yes
 
     - name: Install BIND9, BIND9 Utils, and BIND9 Documentation
       apt:

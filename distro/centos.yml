@@ -1,0 +1,24 @@
+---
+- name: Update, Upgrade, and Install BIND9 CentOS
+  hosts: all
+  user: vagrant
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Update package cache
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+        update_cache: yes
+
+    - name: Install BIND9 and BIND9-utils
+      yum:
+        name: 
+          - bind
+          - bind-utils
+        state: present
