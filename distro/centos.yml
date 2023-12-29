@@ -1,7 +1,6 @@
 ---
 - name: Update, Upgrade, and Install BIND9 CentOS
-  hosts: all
-  user: vagrant
+  hosts: centos
   become: true
   gather_facts: false
   tasks:

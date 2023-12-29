@@ -1,11 +1,6 @@
-[dns:children]
-ubuntu
-
-
 [ubuntu]
-192.168.10.61
-192.168.10.62
-192.168.10.60
+
 [debian]
+192.168.10.90 ansible_user=vagrant
 
 [centos]

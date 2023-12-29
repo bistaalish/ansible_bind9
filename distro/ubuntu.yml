@@ -1,7 +1,7 @@
 ---
-- name: Install BIND9, Update APT Package Lists, and Copy Configurations
+- name: Install BIND9, Update APT Package Lists, and Copy Configurations On Ubuntu
   become: true
-  hosts: debian
+  hosts: ubuntu
   gather_facts: false
   tasks:
     - name: Update APT Package Lists

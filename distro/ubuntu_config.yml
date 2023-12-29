@@ -1,8 +1,7 @@
 ---
 - name: Copying configuration files.
   become: true
-  hosts: all
-  remote_user: vagrant
+  hosts: ubuntu
   gather_facts: false
   tasks:
     - name: Copy named
